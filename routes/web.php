@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubcategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +28,4 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::resource('category',CategoryController::class);
+Route::resource('subcategory',SubcategoryController::class);

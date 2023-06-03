@@ -54,11 +54,17 @@
           </li>
           <li class="app-sidebar__heading"> Category </li>
           <li>
-            <a href="{{route('category.index')}}" class="{{Request::is('category') ? 'mm-active': ''}}">
+            <a href="{{route('category.index')}}" class="{{Request::is('category*') ? 'mm-active': ''}}">
               <i class="metismenu-icon fas fa-hand-holding-usd"></i>
               Category
             </a>
           </li>
+        <li>
+            <a href="{{route('subcategory.index')}}" class="{{Request::is('subcategory*') ? 'mm-active': ''}}">
+                <i class="metismenu-icon fas fa-hand-holding-usd"></i>
+                Subcategory
+            </a>
+        </li>
         </ul>
       </div>
       <!-- for scroll sidebar -->

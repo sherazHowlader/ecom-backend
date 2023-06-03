@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/3_avatar-512.png" type="image/x-icon">
-    <title>  </title>
+    <title> @yield('title') - {{env('APP_NAME')}} </title>
 
     <!-- Bootstrap Library -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css">

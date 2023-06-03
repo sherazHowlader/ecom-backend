@@ -1,6 +1,6 @@
 @extends('partials.app')
 @section('title')
-    Update Category
+    Update Subcategory
 @endsection
 @push('css')
     <style>
@@ -51,13 +51,20 @@
     <div class="col-md-12">
         <div class="main-card mb-3 card">
             <div class="card-body text-center">
-                <form class="needs-validation" action="{{route('category.update',$category->id)}}" method="POST" novalidate>
+                <form class="needs-validation" action="{{route('subcategory.update', $subcategory->id)}}" method="POST" novalidate>
                     @csrf
                     @method('PUT')
                     <div class="offset-md-3 col-md-6">
                         <div class="input-group">
-                            <label class="form-label m-2"> Name : </label>
-                            <input type="text" class="form-control" name="category_name" value="{{$category->name}}">
+                            <select name="category_id" class="btn btn-secondary" name="category_id">
+                                <option selected disabled> --Select Category-- </option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" {{$subcategory->category_id == $category->id ? 'selected' : ''}}> {{ $category->name }} </option>
+                                @endforeach
+                            </select>
+
+                            <input type="text" class="form-control" name="category_name" value="{{$subcategory->name}}">
+
                             <button class="btn btn-info" type="submit"> <i class="fas fa-plus-circle"></i> Update </button>
                         </div>
                     </div>

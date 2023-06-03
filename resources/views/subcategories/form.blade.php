@@ -1,6 +1,6 @@
 @extends('partials.app')
 @section('title')
-    Update Category
+    Add Subcategory
 @endsection
 @push('css')
     <style>
@@ -17,19 +17,18 @@
         }
     </style>
 @endpush
-
 @section('content')
 <div class="app-page-title">
     <div class="page-title-wrapper">
         <div class="page-title-heading">
             <div class="page-title-icon">
-                <i class="fas fa-pen-square">
+                <i class="fas fa-plus-square">
                 </i>
             </div>
-            <div style="font-variant: small-caps"> <b> Category Update </b> </div>
+            <div style="font-variant: small-caps"> <b> Add Subcategory </b> </div>
         </div>
         <div class="page-title-actions">
-            <a href="{{route('category.index')}}" class="btn-shadow mr-3 btn btn-danger">
+            <a href="{{route('subcategory.index')}}" class="btn-shadow mr-3 btn btn-danger">
                 <i class="fas fa-arrow-circle-left"> </i>
                 Back to list
             </a>
@@ -51,14 +50,20 @@
     <div class="col-md-12">
         <div class="main-card mb-3 card">
             <div class="card-body text-center">
-                <form class="needs-validation" action="{{route('category.update',$category->id)}}" method="POST" novalidate>
+                <form class="needs-validation" action="{{route('subcategory.store')}}" method="POST" novalidate>
                     @csrf
-                    @method('PUT')
                     <div class="offset-md-3 col-md-6">
                         <div class="input-group">
-                            <label class="form-label m-2"> Name : </label>
-                            <input type="text" class="form-control" name="category_name" value="{{$category->name}}">
-                            <button class="btn btn-info" type="submit"> <i class="fas fa-plus-circle"></i> Update </button>
+                            <select name="category_id" class="btn btn-secondary" >
+                                <option selected disabled> --Select Category-- </option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}"> {{ $category->name }} </option>
+                                @endforeach
+                            </select>
+
+                            <input type="text" class="form-control" placeholder="Exm - T-Shirt" name="subcategory_name">
+
+                            <button class="btn btn-info" type="submit"> <i class="fas fa-plus-circle"></i> Save </button>
                         </div>
                     </div>
                 </form>
@@ -66,7 +71,4 @@
         </div>
     </div>
 </div>
-<br>
-<br>
-<br>
 @endsection

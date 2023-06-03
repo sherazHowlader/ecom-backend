@@ -1,5 +1,7 @@
 @extends('partials.app')
-
+@section('title')
+    Add Category
+@endsection
 @push('css')
     <style>
         .bd-callout {
