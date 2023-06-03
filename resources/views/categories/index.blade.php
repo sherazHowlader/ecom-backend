@@ -53,12 +53,12 @@
                                         </button>
                                     </form>
                                     @if($category->status == 0)
-                                        <a class="btn btn-info btn-sm" href="{{route('category.edit', $category->id)}}" id="active">
+                                        <a class="btn btn-info btn-sm" href="" id="active" data-id="{{$category->id}}" data-status="{{$category->status}}">
                                             <i class="fas fa-check-double"></i>
                                             Active
                                         </a>
                                     @else
-                                        <a class="btn btn-warning btn-sm" href="{{route('category.edit', $category->id)}}" id="deactive">
+                                        <a class="btn btn-warning btn-sm" href="" id="deactive" data-id="{{$category->id}}" data-status="{{$category->status}}" >
                                             <i class="fas fa-times"></i>
                                             Deactive
                                         </a>
@@ -100,10 +100,25 @@
 
             $('#active, #deactive').on('click', function (e){
                 e.preventDefault();
-                var toggleBtn = $(this).attr('id');
-                var url = toggleBtn == 'active' ? 'deactive kortechi': 'active kortechi';
+                var status = $(this).attr('data-status');
+                var category_id = $(this).attr('data-id');
 
-                console.log(url);
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {status: status, category: category_id},
+                    url: "{{route('category.status.toggle')}}",
+
+                    beforeSend() {
+                        swal.fire({
+                            title: 'Processing your request...',
+                        });
+                        swal.showLoading();
+                    },
+                    success: function (response){
+                        window.location.reload();
+                    }
+                })
             })
         })
 

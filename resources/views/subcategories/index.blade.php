@@ -54,6 +54,17 @@
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </form>
+                                    @if($subcategory->status == 0)
+                                        <a class="btn btn-info btn-sm" href="" id="active" data-id="{{$subcategory->id}}" data-status="{{$subcategory->status}}">
+                                            <i class="fas fa-check-double"></i>
+                                            Active
+                                        </a>
+                                    @else
+                                        <a class="btn btn-warning btn-sm" href="" id="deactive" data-id="{{$subcategory->id}}" data-status="{{$subcategory->status}}" >
+                                            <i class="fas fa-times"></i>
+                                            Deactive
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -89,6 +100,29 @@
                     }
                 })
             });
+
+            $('#active, #deactive').on('click', function (e){
+                e.preventDefault();
+                var status = $(this).attr('data-status');
+                var category_id = $(this).attr('data-id');
+
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {status: status, category: category_id},
+                    url: "{{route('subcategory.status.toggle')}}",
+
+                    beforeSend() {
+                        swal.fire({
+                            title: 'Processing your request...',
+                        });
+                        swal.showLoading();
+                    },
+                    success: function (response){
+                        window.location.reload();
+                    }
+                })
+            })
         })
     </script>
 @endpush

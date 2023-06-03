@@ -63,4 +63,15 @@ class CategoryController extends Controller
         toast('Category delete success','success');
         return redirect()->route('category.index');
     }
+
+    public function statusToggle(Request $request)
+    {
+        $category = Category::findOrFail($request->category);
+
+        $category->update([
+            'status' => $request->status == true ? false : true,
+        ]);
+        toast('Category status change success','success');
+        return response()->json($category);
+    }
 }

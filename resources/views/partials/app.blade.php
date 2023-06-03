@@ -73,6 +73,7 @@
         })()
     </script>
     @include('sweetalert::alert')
+    @routes
     @stack('js')
 </body>
 

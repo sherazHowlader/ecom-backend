@@ -27,5 +27,8 @@ Route::get('/login', function () {
     return view('login');
 })->name('login');
 
+Route::get('category/status/toggle',[CategoryController::class,'statusToggle'])->name('category.status.toggle');
 Route::resource('category',CategoryController::class);
+
+Route::get('subcategory/status/toggle',[SubcategoryController::class,'statusToggle'])->name('subcategory.status.toggle');
 Route::resource('subcategory',SubcategoryController::class);

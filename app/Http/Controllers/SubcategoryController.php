@@ -70,4 +70,15 @@ class SubcategoryController extends Controller
         toast('Subcategory delete success','success');
         return redirect()->route('subcategory.index');
     }
+
+    public function statusToggle(Request $request)
+    {
+        $subcategory = Subcategory::findOrFail($request->category);
+
+        $subcategory->update([
+            'status' => $request->status == true ? false : true,
+        ]);
+        toast('Subcategory status change success','success');
+        return response()->json($subcategory);
+    }
 }
