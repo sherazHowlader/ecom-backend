@@ -32,6 +32,10 @@ class Product extends Model
         return $this->belongsTo(Manufacture::class);;
     }
 
+    public function additionalImages(){
+        return $this->hasMany(ProductImages::class,'product_id');;
+    }
+
     public function getDisplayStatusAttribute(): string
     {
         $status = $this->status;

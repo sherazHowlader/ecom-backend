@@ -17,6 +17,22 @@
         .bd-callout-warning {
             border-left-color: #f0ad4e;;
         }
+
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .close {
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: #000;
+            padding: 5px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
     </style>
 @endpush
 @section('content')
@@ -56,15 +72,15 @@
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title"> Product Info </h5>
-                        <div class="from-group">
+                        <div class="from-group my-2">
                             <label for="name"> Name : </label>
                             <input id="name" type="text" class="form-control" name="name" placeholder="Product Name" value="{{$product->name}}">
                         </div>
-                        <div class="from-group">
+                        <div class="from-group my-2">
                             <label for="name"> SKU : </label>
                             <input type="text" class="form-control" name="sku" placeholder="Exm- XYZ12345" value="{{$product->SKU}}">
                         </div>
-                        <div class="from-group">
+                        <div class="from-group my-2">
                             <label for="email"> Short Description : </label>
                             <textarea name="short_description" id="" rows="5" class="form-control" placeholder="Short Description">{{$product->short_description}}</textarea>
                         </div>
@@ -72,16 +88,29 @@
                             <label for="password"> Description : </label>
                             <textarea name="description" id="" rows="5" class="form-control" placeholder="Description">{{$product->description}}</textarea>
                         </div>
+
+                        <div class="from-group my-2">
+                            <label> Additional Image:</label>
+                            <div>
+                                @foreach($product->additionalImages as $image)
+                                    <div class="image-container">
+                                        <span class="close" data-id="{{$image->id}}">&times;</span>
+                                        <img src="{{asset($image->image)}}" alt="Additional Image" height="100" width="120" />
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
             <div class="col-md-4">
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <div class="from-group my-2">
                             <label for="name"> Select Category : </label>
                             <select name="category_id" class="form-control select2">
-                                <option value=""> --Select Category-- </option>
+                                <option disabled selected> --Select Category-- </option>
                                 @foreach($categories as $category)
                                     <option value="{{$category->id}}" {{$product->category_id == $category->id ? 'selected' : ''}}>{{$category->name}}</option>
                                 @endforeach
@@ -90,7 +119,7 @@
                         <div class="from-group my-2">
                             <label for="name"> Select Subcategory : </label>
                             <select name="subcategory_id" class="form-control select2">
-                                <option value=""> --Select Category-- </option>
+                                <option disabled selected> --Select Subcategory-- </option>
                                 @foreach($subcategories as $subcategory)
                                     <option value="{{$subcategory->id}}" {{$product->subcategory_id == $subcategory->id ? 'selected' : ''}}>{{$subcategory->name}}</option>
                                 @endforeach
@@ -109,6 +138,12 @@
                             <input class="dropify" type="file" name="image" data-default-file="{{asset($product->image)}}">
                         </div>
 
+                        <div class="form-group row m-2">
+                            <label for="" class="">Additional Image</label>
+                            <input type="file" name="additional_image[]" multiple/>
+                            <small class="text-danger mt-2">You can upload multiple image.</small>
+                        </div>
+
                         <div class="d-flex justify-content-end my-2">
                             <button class="btn btn-info" type="submit"> <i class="fas fa-plus-circle"></i> Update </button>
                         </div>
@@ -120,9 +155,31 @@
 @endsection
 @push('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function () {
             $('.dropify').dropify();
+
+            $('.close').on('click', function (){
+                var id = $(this).attr('data-id');
+
+                $.ajax({
+                    dataType: 'json',
+                    type:'get',
+                    url: route('product.additional.image.delete', id),
+
+                    beforeSend() {
+                        swal.fire({
+                            title: 'Processing your request...',
+                        });
+                        swal.showLoading();
+                    },
+                    success: function (response){
+                        swal.close();
+                        location.reload();
+                    }
+                })
+            })
         });
     </script>
 @endpush

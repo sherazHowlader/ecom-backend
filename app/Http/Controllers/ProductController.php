@@ -34,7 +34,7 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request)
     {
-        Product::create([
+        $product = Product::create([
             'category_id'     => $request->category_id,
             'subcategory_id'  => $request->subcategory_id,
             'name'         => $request->name,
@@ -47,7 +47,10 @@ class ProductController extends Controller
             'discount_price'        => $request->discount_price,
         ]);
 
-        toast('Subcategory added success','success');
+        // Add additional image
+        ProductImages::addImages($product->id,$request->additional_image);
+
+        toast('Product added success','success');
         return redirect()->route('product.index');
     }
 
@@ -80,6 +83,9 @@ class ProductController extends Controller
             'discount_price'        => $request->discount_price,
         ]);
 
+        // Add additional image
+        ProductImages::addImages($product->id, $request->additional_image);
+
         toast('Product update success','success');
         return redirect()->route('product.index');
     }
@@ -89,6 +95,7 @@ class ProductController extends Controller
         if (file_exists($product->image))
         {
             unlink($product->image);
+            ProductImages::unlinkImages($product->id);
         }
         $product->delete();
 
@@ -107,7 +114,19 @@ class ProductController extends Controller
         return response()->json($product);
     }
 
+    public function additionalImageDelete($id)
+    {
+        $additionImage = ProductImages::findOrFail($id);
 
+        if (file_exists($additionImage->image))
+        {
+            unlink($additionImage->image);
+        }
+        $additionImage->delete();
+
+        toast('Product additional image delete success','success');
+        return response()->json($additionImage);
+    }
 
 
 

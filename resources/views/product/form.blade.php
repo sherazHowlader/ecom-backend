@@ -80,7 +80,7 @@
                         <div class="from-group m-2">
                             <label for="name"> Select Category : </label>
                             <select name="category_id" class="form-control select2">
-                                <option value=""> --Select Category-- </option>
+                                <option disabled selected> --Select Category-- </option>
                                 @foreach($categories as $category)
                                     <option value="{{$category->id}}">{{$category->name}}</option>
                                 @endforeach
@@ -89,7 +89,7 @@
                         <div class="from-group m-2">
                             <label for="name"> Select Subcategory : </label>
                             <select name="subcategory_id" class="form-control select2">
-                                <option value=""> --Select Category-- </option>
+                                <option disabled selected> --Select Subcategory-- </option>
                                 @foreach($subcategories as $subcategory)
                                     <option value="{{$subcategory->id}}">{{$subcategory->name}}</option>
                                 @endforeach
@@ -106,6 +106,12 @@
                         <div class="from-group m-2">
                             <label for="profile_pic"> Product Image : </label>
                             <input class="dropify" type="file" name="image" multiple>
+                        </div>
+
+                        <div class="form-group row m-2">
+                            <label>Additional Image :</label>
+                            <input type="file" name="additional_image[]" multiple/>
+                            <small class="text-danger mt-2">You can upload multiple image.</small>
                         </div>
 
                         <div class="d-flex justify-content-end mt-3">

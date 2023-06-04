@@ -35,4 +35,5 @@ Route::get('subcategory/status/toggle',[SubcategoryController::class,'statusTogg
 Route::resource('subcategory',SubcategoryController::class);
 
 Route::get('product/status/toggle',[ProductController::class,'statusToggle'])->name('product.status.toggle');
+Route::get('product/additional/image/delete/{id}',[ProductController::class,'additionalImageDelete'])->name('product.additional.image.delete');
 Route::resource('product',ProductController::class);
