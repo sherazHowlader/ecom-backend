@@ -19,8 +19,8 @@ class UserSeeder extends Seeder
         User::updateOrCreate([
             'name'          => 'Md Sheraz Howlader',
             'email'         => 'mdshiraj72@gmail.com',
-            'phone_number'  => '01728692643',
-            'address'       => '168/3,1/A,Shipahibag, Rampura, Dhaka',
+//            'phone_number'  => '01728692643',
+//            'address'       => '168/3,1/A,Shipahibag, Rampura, Dhaka',
             'password'      => Hash::make('Password')
         ]);
     }

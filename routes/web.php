@@ -20,20 +20,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::get('/{any}', function () {
-//    return view('welcome');
-//})->where('any', '.*');
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
+});
 
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
+Route::group(['middleware'=>['auth']],function(){
+    Route::get('category/status/toggle',[CategoryController::class,'statusToggle'])->name('category.status.toggle');
+    Route::resource('category',CategoryController::class);
 
-Route::get('category/status/toggle',[CategoryController::class,'statusToggle'])->name('category.status.toggle');
-Route::resource('category',CategoryController::class);
+    Route::get('subcategory/status/toggle',[SubcategoryController::class,'statusToggle'])->name('subcategory.status.toggle');
+    Route::resource('subcategory',SubcategoryController::class);
 
-Route::get('subcategory/status/toggle',[SubcategoryController::class,'statusToggle'])->name('subcategory.status.toggle');
-Route::resource('subcategory',SubcategoryController::class);
-
-Route::get('product/status/toggle',[ProductController::class,'statusToggle'])->name('product.status.toggle');
-Route::get('product/additional/image/delete/{id}',[ProductController::class,'additionalImageDelete'])->name('product.additional.image.delete');
-Route::resource('product',ProductController::class);
+    Route::get('product/status/toggle',[ProductController::class,'statusToggle'])->name('product.status.toggle');
+    Route::get('product/additional/image/delete/{id}',[ProductController::class,'additionalImageDelete'])->name('product.additional.image.delete');
+    Route::resource('product',ProductController::class);
+});
