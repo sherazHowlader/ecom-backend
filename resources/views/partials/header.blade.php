@@ -1,7 +1,9 @@
 <div class="app-header header-shadow">
     <div class="app-header__logo">
-        <div class="logo-src"></div>
-        <div class="navbar-brand">            
+        <div>
+            <img src="{{asset('images/logo.png')}}" alt="logo" class="logo-src">
+        </div>
+        <div class="navbar-brand">
         </div>
         <div class="header__pane ml-auto">
             <div>
@@ -34,8 +36,8 @@
                 </span>
     </div>
     <div class="app-header__content">
-        <div class="app-header-left">  
-                      
+        <div class="app-header-left">
+
             <div class="search-wrapper">
                 <div class="input-holder">
                     <input type="text" class="search-input" placeholder="Type to search">
@@ -52,9 +54,9 @@
                         <div class="widget-content-left">
                             <div class="btn-group">
                                 <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                    
-                                    <img width="35" class="rounded-circle" src="{{asset('backend/assets/images/avatars/1.jpg')}}" alt="">
-                                   
+
+                                    <img width="35" class="rounded-circle" src="{{asset('images/male.png')}}" alt="">
+
                                   </a>
                                 <div tabindex="-1" role="menu" aria-hidden="true"
                                      class="dropdown-menu dropdown-menu-right">
@@ -62,20 +64,19 @@
                                     <a tabindex="0" class="dropdown-item" href="">Change Password</a>
                                     <a tabindex="0" class="dropdown-item" href="">Settings</a>
                                     <div tabindex="-1" class="dropdown-divider"></div>
-                                    <button type="button" tabindex="0" class="dropdown-item" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">{{ __('Logout') }}</button>
-                                    <form id="logout-form" action="" method="POST" style="display: none;">
+                                    <form action="{{ route('logout') }}" method="POST">
                                         @csrf
+                                        <button type="submit" class="dropdown-item"> Logout </button>
                                     </form>
                                 </div>
                             </div>
                         </div>
                         <div class="widget-content-left  ml-3 header-user-info">
                             <div class="widget-heading">
-                                Sheraz Howlader
+                                {{auth()->user()->full_name}}
                             </div>
                             <div class="widget-subheading">
-                                mdshiraj72@gmail.com
+                                {{auth()->user()->email}}
                             </div>
                         </div>
                     </div>

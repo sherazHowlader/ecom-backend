@@ -17,7 +17,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('category.index');
+});
+
+Route::get('/{any}', function () {
+    return redirect()->route('login');;
 });
 
 Route::middleware([

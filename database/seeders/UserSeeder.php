@@ -17,7 +17,8 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::updateOrCreate([
-            'name'          => 'Md Sheraz Howlader',
+            'first_name'    => 'Md Sheraz',
+            'last_name'     => 'Howlader',
             'email'         => 'mdshiraj72@gmail.com',
 //            'phone_number'  => '01728692643',
 //            'address'       => '168/3,1/A,Shipahibag, Rampura, Dhaka',

@@ -1,6 +1,8 @@
 <div class="app-sidebar sidebar-shadow">
     <div class="app-header__logo">
-      <div class="logo-src"></div>
+      <div>
+          <img src="{{asset('images/logo.png')}}" alt="logo" class="logo-src">
+      </div>
       <div class="header__pane ml-auto">
         <div>
           <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -33,12 +35,12 @@
       <div class="app-sidebar__inner">
 
         <div class="profilePicture">
-          <img src="" alt="profilePicture">
+          <img src="{{asset('images/male.png')}}" alt="profilePicture">
         </div>
         <div class="text-center mb-4 mt-3">
-          <h4>
-              <b> Sheraz Howlader </b> <br>
-          </h4>
+          <h5>
+              <b> {{auth()->user()->full_name}} </b> <br>
+          </h5>
           <h6>
               Admin
           </h6>
