@@ -110,7 +110,7 @@
                         </div>
 
                         <div class="d-flex justify-content-end my-2">
-                            <button class="btn btn-info" type="submit"> <i class="fas fa-plus-circle"></i> Save </button>
+                            <button class="btn btn-info" type="submit"> <i class="fas fa-plus-circle"></i> Update </button>
                         </div>
                     </div>
                 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\ProductVariants;
 use App\Models\Carts;
@@ -55,6 +56,32 @@ class ProductController extends Controller
         $categories = Categorie::all();
         $subcategories = Subcategory::all();
         return view('product.edit', compact('categories','subcategories','product'));
+    }
+
+    public function update(UpdateProductRequest $request, Product $product)
+    {
+        if ($request->file('image')) {
+            file_exists($product->image) && unlink($product->image);
+            $image = Product::getImage($request);
+        } else {
+            $image = $product->image;
+        }
+
+        $product->update([
+            'category_id'     => $request->category_id,
+            'subcategory_id'  => $request->subcategory_id,
+            'name'         => $request->name,
+            'slug'         => Str::slug($request->name),
+            'SKU'          => $request->sku,
+            'image'        => $image,
+            'short_description'     => $request->short_description,
+            'description'           => $request->description,
+            'regular_price'         => $request->regular_price,
+            'discount_price'        => $request->discount_price,
+        ]);
+
+        toast('Product update success','success');
+        return redirect()->route('product.index');
     }
 
     public function destroy(Product $product)
