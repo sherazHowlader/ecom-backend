@@ -1,11 +1,9 @@
 import './bootstrap';
 
-import { createApp } from "vue";
-import App from './App.vue';
-import router  from "./router";
-import store from "./store";
+import Alpine from 'alpinejs';
+import focus from '@alpinejs/focus';
+window.Alpine = Alpine;
 
-createApp(App)
-    .use(router )
-    .use(store)
-    .mount('#app')
+Alpine.plugin(focus);
+
+Alpine.start();
