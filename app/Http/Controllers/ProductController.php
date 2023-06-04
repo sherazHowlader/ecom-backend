@@ -7,7 +7,6 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\ProductVariants;
 use App\Models\Carts;
-use App\Models\Categorie;
 use App\Models\Coupon;
 use App\Models\Product;
 
@@ -26,7 +25,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        $categories = Categorie::all();
+        $categories = Category::all();
         $subcategories = Subcategory::all();
         $products = Product::all();
         return view('product.form' , compact('categories','subcategories','products'));
@@ -48,7 +47,9 @@ class ProductController extends Controller
         ]);
 
         // Add additional image
-        ProductImages::addImages($product->id,$request->additional_image);
+        if (isset($request->additional_image)){
+            ProductImages::addImages($product->id,$request->additional_image);
+        }
 
         toast('Product added success','success');
         return redirect()->route('product.index');
@@ -56,7 +57,7 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        $categories = Categorie::all();
+        $categories = Category::all();
         $subcategories = Subcategory::all();
         return view('product.edit', compact('categories','subcategories','product'));
     }

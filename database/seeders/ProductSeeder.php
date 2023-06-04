@@ -17,28 +17,6 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        // Categorie
-        Categorie::updateOrCreate([
-            'name' => 'Phones',
-            'slug' => 'phones',
-        ]);
-
-        Categorie::updateOrCreate([
-            'name' => 'Watches',
-            'slug' => 'watches',
-        ]);
-
-        Categorie::updateOrCreate([
-            'name' => 'Speaker',
-            'slug' => 'speaker',
-        ]);
-
-        Categorie::updateOrCreate([
-            'name' => 'Camera',
-            'slug' => 'camera',
-        ]);
-
-
         // Manufactures
         Manufacture::updateOrCreate([
             'name' => 'Ma Babar Doa',
@@ -65,54 +43,50 @@ class ProductSeeder extends Seeder
 
         // Product
         Product::updateOrCreate([
-            'categorie_id' => '2',
+            'category_id' => 1,
+            'subcategory_id' => 3,
             'name' => 'Xiaomi Mi Band 5',
             'slug' => 'mi-band',
-            'SKU' => '259407923_BD-1213130033',
-            'image' => 'frontend/images/products/product-1.jpg',
+            'SKU' => '259407923_BD-1213130031',
             'regular_price' => '2100',
             'discount_price' => '2000',
-            'SKU' => '229711895_BD-1173279422',
             'short_description' => 'Xiaomi Mi Band 5 short_description short_description',
             'description' => 'Vegetables are parts of plants that are consumed by humans or other animals as food.',
             'status' => true,
         ]);
 
         Product::updateOrCreate([
-            'categorie_id' => '3',
+            'category_id' => 3,
+            'subcategory_id' => 4,
             'name' => 'Big Power Sound Speaker',
             'slug' => 'box',
-            'SKU' => '259407923_BD-1213130033',
-            'image' => 'frontend/images/products/product-2.jpg',
+            'SKU' => '259407923_BD-1213130032',
             'regular_price' => '250',
-            'SKU' => '229711895_BD-1173279424',
             'short_description' => 'Big Power Sound Speaker short_description short_description',
             'description' => 'Pokio is the first real money native mobile poker app.',
             'status' => true,
         ]);
 
         Product::updateOrCreate([
-            'categorie_id' => '4',
+            'category_id' => 4,
+            'subcategory_id' => 5,
             'name' => 'WiFi Security Camera',
             'slug' => 'camera',
             'SKU' => '259407923_BD-1213130033',
-            'image' => 'frontend/images/products/product-3.jpg',
             'regular_price' => '500',
             'discount_price' => '400',
-            'SKU' => '229711895_BD-1173279425',
             'short_description' => 'WiFi Security Camera short_description short_description',
             'description' => 'A hamburger, or simply burger, is a food consisting of fillings—usually a patty of ground meat, typically beef—placed inside a sliced bun or bread roll.',
             'status' => true,
         ]);
 
         Product::updateOrCreate([
-            'categorie_id' => '1',
+            'category_id' => 1,
+            'subcategory_id' => 2,
             'name' => 'iphone 6x plus',
             'slug' => 'iphone',
-            'SKU' => '259407923_BD-1213130033',
-            'image' => 'frontend/images/products/product-4.jpg',
+            'SKU' => '259407923_BD-1213130034',
             'regular_price' => '420',
-            'SKU' => '229711895_BD-1173279426',
             'short_description' => 'iphone 6x plus short_description short_description',
             'description' => 'A frog mug (also known as a toad mug, surprise mug or ague mug) is a type of ceramic vessel mainly used for drinking beer or similar alcoholic beverages.',
             'status' => true,

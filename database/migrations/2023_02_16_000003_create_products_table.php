@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained('categories');
+            $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->foreignId('subcategory_id')->constrained('subcategories');
             $table->string('name');
             $table->string('slug');
             $table->string('SKU')->unique();
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('short_description');
             $table->string('description');
             $table->string('regular_price');
