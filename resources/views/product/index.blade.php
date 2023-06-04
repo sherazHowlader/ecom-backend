@@ -1,6 +1,6 @@
 @extends('partials.app')
 @section('title')
-    Subcategories
+    Products
 @endsection
 @section('content')
 <div class="app-page-title">
@@ -10,10 +10,10 @@
                 <i class="fas fa-poll">
                 </i>
             </div>
-            <div style="font-variant: small-caps"> <b> Subcategories </b> </div>
+            <div style="font-variant: small-caps"> <b> Products </b> </div>
         </div>
         <div class="page-title-actions">
-            <a href="{{route('subcategory.create')}}" class="btn-shadow mr-3 btn btn-primary">
+            <a href="{{route('product.create')}}" class="btn-shadow mr-3 btn btn-primary">
                 <i class="fas fa-plus-circle"> </i>
                 Add
             </a>
@@ -28,39 +28,51 @@
                     <thead>
                         <tr>
                             <th class="text-center">S/L</th>
+                            <th class="text-center">image</th>
                             <th class="text-center">Category Name</th>
-                            <th class="text-center">Subcategory Name</th>
+                            <th class="text-center">Name</th>
                             <th class="text-center">Slug</th>
+                            <th class="text-center">SKU</th>
+                            <th class="text-center">Price</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($subcategories as $key => $subcategory)
+                        @foreach ($products as $key => $product)
                             <tr>
                                 <td class="text-center text-muted">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ $subcategory->categorie->name }}</td>
-                                <td class="text-center">{{ $subcategory->name }}</td>
-                                <td class="text-center">{{ $subcategory->slug }}</td>
-                                <td class="text-center"> {!! $subcategory->display_status !!} </td>
+                                <td class="text-center text-muted">
+                                    <img src="{{ $product->image  }}" alt="Product Image" height="50px">
+                                </td>
                                 <td class="text-center">
-                                    <a class="btn btn-info btn-sm" href="{{route('subcategory.edit', $subcategory->id)}}">
+                                    {{ $product->categorie->name  }}
+                                    <br/>
+                                    <small class="badge badge-pill badge-primary">{{ $product->subcategorie->name  }}</small>
+                                </td>
+                                <td class="text-center">{{ $product->name }}</td>
+                                <td class="text-center">{{ $product->slug }}</td>
+                                <td class="text-center">{{ $product->SKU }}</td>
+                                <td class="text-center">{{ $product->regular_price }}</td>
+                                <td class="text-center">{!! $product->display_status !!}</td>
+                                <td class="text-center">
+                                    <a class="btn btn-info btn-sm" href="{{route('product.edit', $product->id)}}">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <form action="{{route('subcategory.destroy', $subcategory->id)}}" method="post" class="d-inline">
+                                    <form action="{{route('product.destroy', $product->id)}}" method="post" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger btn-sm delete-subcategory" type="submit" data-confirm-delete="true">
+                                        <button class="btn btn-danger btn-sm delete-category" type="submit" data-confirm-delete="true">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </form>
-                                    @if($subcategory->status == 0)
-                                        <a class="btn btn-info btn-sm" href="" id="active" data-id="{{$subcategory->id}}" data-status="{{$subcategory->status}}">
+                                    @if($product->status == 0)
+                                        <a class="btn btn-info btn-sm" href="" id="active" data-id="{{$product->id}}" data-status="{{$product->status}}">
                                             <i class="fas fa-check-double"></i>
                                             Active
                                         </a>
                                     @else
-                                        <a class="btn btn-warning btn-sm" href="" id="deactive" data-id="{{$subcategory->id}}" data-status="{{$subcategory->status}}" >
+                                        <a class="btn btn-warning btn-sm" href="" id="deactive" data-id="{{$product->id}}" data-status="{{$product->status}}" >
                                             <i class="fas fa-times"></i>
                                             Deactive
                                         </a>
@@ -82,9 +94,8 @@
 @push('js')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-
         $(function () {
-            $('.delete-subcategory').on('click', function (e) {
+            $('.delete-category').on('click', function (e) {
                 e.preventDefault();
                 swal.fire({
                     title: 'Are you sure?',
@@ -104,13 +115,13 @@
             $('#active, #deactive').on('click', function (e){
                 e.preventDefault();
                 var status = $(this).attr('data-status');
-                var category_id = $(this).attr('data-id');
+                var product_id = $(this).attr('data-id');
 
                 $.ajax({
                     type: 'GET',
                     dataType: 'json',
-                    data: {status: status, category: category_id},
-                    url: "{{route('subcategory.status.toggle')}}",
+                    data: {status: status, product: product_id},
+                    url: "{{route('product.status.toggle')}}",
 
                     beforeSend() {
                         swal.fire({
@@ -124,5 +135,6 @@
                 })
             })
         })
+
     </script>
 @endpush

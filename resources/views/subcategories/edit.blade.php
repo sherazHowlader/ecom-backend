@@ -55,16 +55,20 @@
                     @csrf
                     @method('PUT')
                     <div class="offset-md-3 col-md-6">
-                        <div class="input-group">
-                            <select name="category_id" class="btn btn-secondary" name="category_id">
+                        <div class="input-group m-2">
+                            <select name="category_id" class="form-control select2" name="category_id">
                                 <option selected disabled> --Select Category-- </option>
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}" {{$subcategory->category_id == $category->id ? 'selected' : ''}}> {{ $category->name }} </option>
                                 @endforeach
                             </select>
+                        </div>
 
+                        <div class="input-group m-2">
                             <input type="text" class="form-control" name="category_name" value="{{$subcategory->name}}">
+                        </div>
 
+                        <div class="input-group m-2 d-flex justify-content-center">
                             <button class="btn btn-info" type="submit"> <i class="fas fa-plus-circle"></i> Update </button>
                         </div>
                     </div>

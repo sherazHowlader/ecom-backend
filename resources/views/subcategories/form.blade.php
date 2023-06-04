@@ -53,16 +53,18 @@
                 <form class="needs-validation" action="{{route('subcategory.store')}}" method="POST" novalidate>
                     @csrf
                     <div class="offset-md-3 col-md-6">
-                        <div class="input-group">
-                            <select name="category_id" class="btn btn-secondary" >
+                        <div class="input-group m-2">
+                            <select name="category_id" class="form-control select2" >
                                 <option selected disabled> --Select Category-- </option>
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}"> {{ $category->name }} </option>
                                 @endforeach
                             </select>
-
+                        </div>
+                        <div class="input-group m-2">
                             <input type="text" class="form-control" placeholder="Exm - T-Shirt" name="subcategory_name">
-
+                        </div>
+                        <div class="input-group m-2 d-flex justify-content-center">
                             <button class="btn btn-info" type="submit"> <i class="fas fa-plus-circle"></i> Save </button>
                         </div>
                     </div>

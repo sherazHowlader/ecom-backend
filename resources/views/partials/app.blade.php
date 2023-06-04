@@ -12,6 +12,7 @@
 
     <!-- Bootstrap Library -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <!-- Styles -->
     <link href="{{ asset('backend/main.css') }}" rel="stylesheet">
@@ -48,6 +49,7 @@
     <script src="{{ asset('backend/assets/scripts/main.js')}}"></script>
     <script src="{{ asset('backend/js/app.js') }}"></script>
     <script src="{{ asset('backend/js/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <!-- Form Validation -->
     <script>
@@ -70,6 +72,8 @@
                 form.classList.add('was-validated')
             }, false)
             })
+
+            $('.select2').select2()
         })()
     </script>
     @include('sweetalert::alert')

@@ -65,6 +65,13 @@
                 Subcategory
             </a>
         </li>
+        <li>
+            <a href="{{route('product.index')}}" class="{{Request::is('product*') ? 'mm-active': ''}}">
+                <i class="metismenu-icon fas fa-hand-holding-usd"></i>
+                Product
+            </a>
+        </li>
+
         </ul>
       </div>
       <!-- for scroll sidebar -->
