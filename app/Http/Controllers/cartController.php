@@ -14,13 +14,26 @@ class cartController extends Controller
 
     public function getAllCarts()
     {
-        $carts = Carts::join('products', 'products.id', '=', 'carts.product_id')
-            ->join('categories', 'categories.id', '=', 'products.categorie_id')
-            ->select('carts.*','carts.quantity as cart_quantity', 'products.image', 'categories.name as category_name')
-            ->get();
-//            ->makeHidden(['id']);
+        $carts = Carts::with('products.categorie')->get();
 
-        return $carts;
+        $carts->transform(function ($cart) {
+            $cart->products->image = url($cart->products->image);
+
+            $cart->products->category_name = $cart->products->categorie->name;
+            unset($cart->products->categorie);
+
+            $cart = collect($cart)
+            ->except(['user_id', 'created_at', 'updated_at'])
+            ->toArray();
+
+            $cart['products'] = collect($cart['products'])
+            ->only(['id','name','slug','SKU','image','category_name','regular_price','discount_price'])
+            ->toArray();
+
+            return $cart;
+        });
+
+        return response()->json($carts);
     }
 
     public function addCartItem(Request $request)

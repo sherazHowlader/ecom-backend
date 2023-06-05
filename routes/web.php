@@ -20,10 +20,6 @@ Route::get('/', function () {
     return redirect()->route('category.index');
 });
 
-Route::get('/{any}', function () {
-    return redirect()->route('login');;
-});
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

@@ -48,7 +48,7 @@ class ProductController extends Controller
 
         // Add additional image
         if (isset($request->additional_image)){
-            ProductImages::addImages($product->id,$request->additional_image);
+            ProductImages::addImages($product->id, $request->additional_image);
         }
 
         toast('Product added success','success');
@@ -85,7 +85,9 @@ class ProductController extends Controller
         ]);
 
         // Add additional image
-        ProductImages::addImages($product->id, $request->additional_image);
+        if (isset($request->additional_image)){
+            ProductImages::addImages($product->id, $request->additional_image);
+        }
 
         toast('Product update success','success');
         return redirect()->route('product.index');
@@ -136,25 +138,71 @@ class ProductController extends Controller
 //===========================API Start==========================================
     public function getAllProduct()
     {
-        $products = Product::join('categories', 'categories.id', '=', 'products.categorie_id')
-            ->select('products.*', 'categories.name as category_name')
-            ->get();
+        $products = Product::with('categorie', 'subcategorie', 'additionalImages')
+        ->where('status', true)
+        ->get();
 
-        return $products;
+        $products->transform(function ($product) {
+        $product->image = url($product->image); // Generate full URL for the main image
+
+        $product->category_name = $product->categorie->name; // Add the category name to the product object
+        unset($product->categorie); // Remove the "categorie" relation from the response
+
+        $product->subcategory_name = $product->subcategorie->name; // Add the subcategory name to the product object
+        unset($product->subcategorie); // Remove the "subcategorie" relation from the response
+
+        $additionalImages = $product->additionalImages->pluck('image')->map(function ($image) {
+            return url($image); // Generate full URL for each additional image
+        });
+
+        $product->otherImages = $additionalImages; // Replace additionalImages with the URLs
+        unset($product->additionalImages); // Remove the "subcategorie" relation from the response
+
+        unset($product->created_at); // Remove the "created_at" field from the response
+        unset($product->updated_at); // Remove the "updated_at" field from the response
+        unset($product->category_id); // Remove the "category_id" field from the response
+        unset($product->subcategory_id); // Remove the "subcategory_id" field from the response
+        unset($product->status); // Remove the "status" field from the response
+
+        return $product;
+        });
+
+        return response()->json($products);
     }
 
     public function getProductBySlug($slug)
     {
-        $products = Product::join('categories', 'categories.id', '=' , 'products.categorie_id')
-            ->select('products.*', 'categories.name as category_name')
-            ->where('products.slug', $slug)
+        $products = Product::with('categorie', 'subcategorie', 'additionalImages')
+            ->where('slug', $slug)
             ->first();
 
-        return $products;
+        $products->image = url($products->image);
+        $products->category_name = $products->categorie->name;
+        $products->subcategory_name = $products->subcategorie->name;
+
+        unset($products->categorie); // Remove the "categorie" relation from the response
+
+        unset($products->subcategorie); // Remove the "subcategorie" relation from the response
+
+        $additionalImages = $products->additionalImages->pluck('image')->map(function ($image) {
+            return url($image); // Generate full URL for each additional image
+        });
+
+        $products->otherImages = $additionalImages; // Replace additionalImages with the URLs
+        unset($products->additionalImages); // Remove the "subcategorie" relation from the response
+
+        unset($products->created_at); // Remove the "created_at" field from the response
+        unset($products->updated_at); // Remove the "updated_at" field from the response
+        unset($products->category_id); // Remove the "category_id" field from the response
+        unset($products->subcategory_id); // Remove the "subcategory_id" field from the response
+        unset($products->status); // Remove the "status" field from the response
+        
+        return response()->json($products);
     }
 
     public function coupon(Request $request)
     {
+        dd($request->all());
         $request->validate([
             'name' => 'required'
         ]);
