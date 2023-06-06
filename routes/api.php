@@ -9,15 +9,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //Public Routes
-Route::get('products/',[\App\Http\Controllers\productController::class,'getAllProduct']);
-Route::get('product/{slug}',[\App\Http\Controllers\productController::class,'getProductBySlug']);
+Route::get('products/',[\App\Http\Controllers\ProductController::class,'getAllProduct']);
+Route::get('product/{slug}',[\App\Http\Controllers\ProductController::class,'getProductBySlug']);
 
-Route::get('product-images/{slug}',[\App\Http\Controllers\productController::class,'productImages']);
-Route::get('product-variant/{slug}',[\App\Http\Controllers\productController::class,'productVariant']);
+Route::get('product-images/{slug}',[\App\Http\Controllers\ProductController::class,'productImages']);
+Route::get('product-variant/{slug}',[\App\Http\Controllers\ProductController::class,'productVariant']);
 
 
 
-Route::post('coupon/',[\App\Http\Controllers\productController::class,'coupon']);
+Route::post('coupon/',[\App\Http\Controllers\ProductController::class,'coupon']);
 
 Route::get('carts/',[\App\Http\Controllers\cartController::class,'getAllCarts']);
 Route::post('add-cart-item/',[\App\Http\Controllers\cartController::class,'addCartItem']);
