@@ -2,7 +2,7 @@ name: Deploy Laravel Project on push
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   web-deploy:
     name: Deploy
@@ -17,10 +17,6 @@ jobs:
         run: composer update --ignore-platform-reqs
       - name: Generate key
         run: php artisan key:generate
-      - name: Install Node.js dependencies
-        run: npm install
-      - name: Generate Build file
-        run: npm run build
       - name: Generate storage link
         run: php artisan storage:link
       - name: Directory Permissions
