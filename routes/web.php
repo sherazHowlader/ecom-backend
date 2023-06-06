@@ -3,6 +3,9 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CouponController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +43,14 @@ Route::group(['middleware'=>['auth']],function(){
     Route::get('product/status/toggle',[ProductController::class,'statusToggle'])->name('product.status.toggle');
     Route::get('product/additional/image/delete/{id}',[ProductController::class,'additionalImageDelete'])->name('product.additional.image.delete');
     Route::resource('product',ProductController::class);
+
+    Route::get('coupon/status/toggle',[CouponController::class,'statusToggle'])->name('coupon.status.toggle');
+    Route::resource('coupon',CouponController::class);
+
+    Route::get('order/status/toggle',[OrderController::class,'statusToggle'])->name('order.status.toggle');
+    Route::resource('order',OrderController::class);
+
+    Route::resource('user',UserController::class);
 });
 
 Route::fallback(function () {

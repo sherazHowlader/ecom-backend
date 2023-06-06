@@ -14,7 +14,23 @@ class Order extends Model
         return $this->belongsTo(Shipping::class);;
     }
 
-    public function orderDetails(){
+    public function orders(){
         return $this->hasMany(OrderDetails::class);;
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(User::class, 'customer_id');;
+    }
+
+    public function getDisplayStatusAttribute(): string
+    {
+        $status = $this->status;
+
+        return match ($status) {
+            'complete' => "<p class='badge badge-success rounded-pill m-0'>Complete</p>",
+            'process'  => "<p class='badge badge-info rounded-pill m-0'>Process</p>",
+            default    => "<p class='badge badge-warning rounded-pill m-0'>Pending</p>",
+        };
     }
 }

@@ -15,15 +15,13 @@ Route::get('product/{slug}',[\App\Http\Controllers\ProductController::class,'get
 Route::get('product-images/{slug}',[\App\Http\Controllers\ProductController::class,'productImages']);
 Route::get('product-variant/{slug}',[\App\Http\Controllers\ProductController::class,'productVariant']);
 
-
-
 Route::post('coupon/',[\App\Http\Controllers\ProductController::class,'coupon']);
 
-Route::get('carts/',[\App\Http\Controllers\cartController::class,'getAllCarts']);
-Route::post('add-cart-item/',[\App\Http\Controllers\cartController::class,'addCartItem']);
-Route::get('cart-inc/{SKU}',[\App\Http\Controllers\cartController::class,'cartInc']);
-Route::get('cart-dec/{SKU}',[\App\Http\Controllers\cartController::class,'cartDec']);
-Route::delete('cart-item-remove/{SKU}',[\App\Http\Controllers\cartController::class,'removeCartItem']);
+Route::get('carts/',[\App\Http\Controllers\CartController::class,'getAllCarts']);
+Route::post('add-cart-item/',[\App\Http\Controllers\CartController::class,'addCartItem']);
+Route::get('cart-inc/{SKU}',[\App\Http\Controllers\CartController::class,'cartInc']);
+Route::get('cart-dec/{SKU}',[\App\Http\Controllers\CartController::class,'cartDec']);
+Route::delete('cart-item-remove/{SKU}',[\App\Http\Controllers\CartController::class,'removeCartItem']);
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('login/', 'login');
