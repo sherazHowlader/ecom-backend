@@ -20,10 +20,6 @@ Route::get('/', function () {
     return redirect()->route('category.index');
 });
 
-Route::get('/{any}', function () {
-    return redirect()->route('login');;
-});
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -44,4 +40,8 @@ Route::group(['middleware'=>['auth']],function(){
     Route::get('product/status/toggle',[ProductController::class,'statusToggle'])->name('product.status.toggle');
     Route::get('product/additional/image/delete/{id}',[ProductController::class,'additionalImageDelete'])->name('product.additional.image.delete');
     Route::resource('product',ProductController::class);
+});
+
+Route::fallback(function () {
+    return view('errors.404');
 });
