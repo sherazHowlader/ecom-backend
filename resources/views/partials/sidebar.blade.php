@@ -57,20 +57,38 @@
           <li class="app-sidebar__heading"> Category </li>
           <li>
             <a href="{{route('category.index')}}" class="{{Request::is('category*') ? 'mm-active': ''}}">
-              <i class="metismenu-icon fas fa-hand-holding-usd"></i>
-              Category
+              <i class="metismenu-icon fas fa-th-list"></i>
+              Categories
             </a>
           </li>
         <li>
             <a href="{{route('subcategory.index')}}" class="{{Request::is('subcategory*') ? 'mm-active': ''}}">
-                <i class="metismenu-icon fas fa-hand-holding-usd"></i>
-                Subcategory
+                <i class="metismenu-icon fas fa-stream"></i>
+                Subcategories
             </a>
         </li>
         <li>
             <a href="{{route('product.index')}}" class="{{Request::is('product*') ? 'mm-active': ''}}">
-                <i class="metismenu-icon fas fa-hand-holding-usd"></i>
-                Product
+                <i class="metismenu-icon fas fa-box-open"></i>
+                Products
+            </a>
+        </li>
+        <li>
+            <a href="{{route('coupon.index')}}" class="{{Request::is('coupon*') ? 'mm-active': ''}}">
+                <i class="metismenu-icon fas fa-percent"></i>
+                Coupons
+            </a>
+        </li>
+        <li>
+            <a href="{{route('order.index')}}" class="{{Request::is('order*') ? 'mm-active': ''}}">
+                <i class="metismenu-icon fas fa-shopping-cart"></i>
+                Orders
+            </a>
+        </li>
+        <li>
+            <a href="{{route('user.index')}}" class="{{Request::is('user*') ? 'mm-active': ''}}">
+                <i class="metismenu-icon fas fa-user-alt"></i>
+                Users
             </a>
         </li>
 

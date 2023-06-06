@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('total');
             $table->string('subtotal');
             $table->string('discount');
-            $table->string('status')->default('Pending');
+            $table->enum('status', ['complete','process','pending'])->default('pending');
             $table->timestamps();
         });
     }

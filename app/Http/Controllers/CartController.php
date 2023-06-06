@@ -8,7 +8,7 @@ use App\Models\Product;
 
 use Illuminate\Http\Request;
 
-class cartController extends Controller
+class CartController extends Controller
 {
     private $sku, $ProVariant, $RegPrice, $DisPrice;
 
