@@ -36,8 +36,8 @@
                         @foreach ($orders as $key => $order)
                             <tr>
                                 <td class="text-center text-muted">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ $order->invoice_id }}</td>
-                                <td class="text-center">{{ $order->customer_id }}</td>
+                                <td class="text-center">#{{ $order->invoice_id }}</td>
+                                <td class="text-center">{{ $order->customer->full_name }}</td>
                                 <td class="text-center">{{ $order->payment_type }}</td>
                                 <td class="text-center">{{ $order->total }}</td>
                                 <td class="text-center">{{ $order->subtotal }}</td>
@@ -51,7 +51,21 @@
                                         More
                                     </button>
                                     <div class="dropdown-menu">
-                                        <button type="button" class="dropdown-item">Menus</button>
+                                        @if ($order->status !== 'complete' & $order->status !== 'cancel')
+                                            <a href="{{route('order.complete', $order->id)}}" class="dropdown-item">
+                                                <i class="fas fa-check-double"> Order Complete</i>
+                                            </a>
+                                        @endif
+                                        
+                                        <a href="" class="dropdown-item">
+                                            <i class="fas fa-eye"> View Invoice</i>
+                                        </a>
+
+                                        @if ($order->status == 'cancel')                                        
+                                            <a href="" class="dropdown-item">
+                                                <i class="fas fa-trash-alt"> Order Delete</i>
+                                            </a>
+                                        @endif                                        
                                     </div>
                                 </td>
                             </tr>

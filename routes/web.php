@@ -47,7 +47,7 @@ Route::group(['middleware'=>['auth']],function(){
     Route::get('coupon/status/toggle',[CouponController::class,'statusToggle'])->name('coupon.status.toggle');
     Route::resource('coupon',CouponController::class);
 
-    Route::get('order/status/toggle',[OrderController::class,'statusToggle'])->name('order.status.toggle');
+    Route::get('order/complete/{id}',[OrderController::class,'orderComplete'])->name('order.complete');
     Route::resource('order',OrderController::class);
 
     Route::resource('user',UserController::class);
