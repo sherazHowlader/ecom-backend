@@ -156,7 +156,7 @@
                                     </td>
                                     <td>:</td>
                                     <td>
-                                        <span class="font-weight-bold">{{$order->shipping->name}}</span>
+                                        <span class="font-weight-bold">{{$order->shipping->name ?? 'Self'}}</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -165,20 +165,12 @@
                                     </td>
                                     <td>:</td>
                                     <td>
-                                        <span class="font-weight-bold">{{$order->shipping->phone_number}}</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span>Address</span>
-                                    </td>
-                                    <td>:</td>
-                                    <td>
-                                        <span class="font-weight-bold"> {{$order->shipping->address}} </span>
+                                        <span class="font-weight-bold">{{$order->shipping->phone_number ?? 'Self'}}</span>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
+                            <p class="text-center font-weight-bold mt-2">{{$order->shipping->address ?? 'Self'}}</p>
                         </div>
                     </div>
                 </div>

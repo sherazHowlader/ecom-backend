@@ -30,6 +30,7 @@ class Order extends Model
         return match ($status) {
             'complete' => "<p class='badge badge-success rounded-pill m-0'>Complete</p>",
             'process'  => "<p class='badge badge-info rounded-pill m-0'>Process</p>",
+            'cancel'  => "<p class='badge badge-danger rounded-pill m-0'>Cancel</p>",
             default    => "<p class='badge badge-warning rounded-pill m-0'>Pending</p>",
         };
     }
