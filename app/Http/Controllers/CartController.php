@@ -17,20 +17,28 @@ class CartController extends Controller
         $carts = Carts::with('products.categorie')->get();
 
         $carts->transform(function ($cart) {
-            $cart->products->image = url($cart->products->image);
+            $cartData = $cart->toArray();
 
-            $cart->products->category_name = $cart->products->categorie->name;
-            unset($cart->products->categorie);
+            $relativeImagePath = $cartData['products']['image'];
+            $cartData['products']['image'] = asset($relativeImagePath);
 
-            $cart = collect($cart)
-            ->except(['user_id', 'created_at', 'updated_at'])
-            ->toArray();
+            $cartData['category_name'] = $cartData['products']['categorie']['name'];
 
-            $cart['products'] = collect($cart['products'])
-            ->only(['id','name','slug','SKU','image','category_name','regular_price','discount_price'])
-            ->toArray();
+            unset($cartData['products']['categorie']);
+            $cartData = array_merge($cartData, $cartData['products']);
+            unset($cartData['products']);
+            unset($cartData['category_id']);
+            unset($cartData['subcategory_id']);
+            unset($cartData['status']);
+            unset($cartData['created_at']);
+            unset($cartData['updated_at']);
+            unset($cartData['user_id']);
+            unset($cartData['product_id']);
+            unset($cartData['id']);
+            unset($cartData['short_description']);
+            unset($cartData['description']);
 
-            return $cart;
+            return $cartData;
         });
 
         return response()->json($carts);
@@ -38,32 +46,31 @@ class CartController extends Controller
 
     public function addCartItem(Request $request)
     {
-        $this->sku          = $request->variant ? $request->variant['SKU'] : $request->product['SKU'];
-        $this->ProVariant   = $request->variant ? $request->variant['size'] : "Default";
-        $this->RegPrice     = $request->variant ? $request->variant['regular_price'] : $request->product['regular_price'];
-        $this->DisPrice     = $request->variant ? $request->variant['discount_price'] : $request->product['discount_price'];
+//        return response()->json(['status', $request->all()]);
 
-        $product = Product::where('id', $request->product['id'])->first();
+        $product = Product::findOrFail($request->product_id);
 
-        // Cart a jodi already itme thake tahole increment korbe
+        // Cart a jodi already item thake tahole increment korbe
         // R na thakle item create korbe
-        $checkCartItem = Carts::where('SKU', $this->sku)->first();
+        $checkCartItem = Carts::where('SKU', $product->SKU)->first();
 
         if ($checkCartItem) {
-            Carts::where('SKU', $this->sku)
-                ->increment('quantity', $request->qty);
+            Carts::where('SKU', $product->SKU)
+                ->increment('quantity', $request->quantity ?? 1);
         } else {
             return Carts::create([
                 'user_id'           => md5($_SERVER['REMOTE_ADDR']),
                 'product_id'        => $product->id,
-                'product_variant'   => $this->ProVariant,
-                'name'              => $product['name'],
-                'regular_price'     => $this->RegPrice,
-                'discount_price'    => $this->DisPrice ? $this->DisPrice : "",
-                'quantity'          => $request->qty,
-                'SKU'               => $this->sku,
+                'product_variant'   => $request->product_variant ?? 'Default',
+                'name'              => $product->name,
+                'regular_price'     => $product->regular_price,
+                'discount_price'    => $product->discount_price ?? '',
+                'quantity'          => $request->quantity ?? 1,
+                'SKU'               => $product->SKU,
             ]);
         }
+
+        return response()->json(['status', $product]);
     }
 
     public function cartInc($SKU)

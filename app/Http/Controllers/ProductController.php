@@ -196,18 +196,17 @@ class ProductController extends Controller
         unset($products->category_id); // Remove the "category_id" field from the response
         unset($products->subcategory_id); // Remove the "subcategory_id" field from the response
         unset($products->status); // Remove the "status" field from the response
-        
+
         return response()->json($products);
     }
 
     public function coupon(Request $request)
     {
-        dd($request->all());
         $request->validate([
             'name' => 'required'
         ]);
         return $cpn = Coupon::where('name', $request->name)
-            ->where('status', 1)
+            ->where('status', true)
             ->first();
     }
 

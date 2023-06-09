@@ -45,8 +45,9 @@ class OrderSeeder extends Seeder
         ]);
 
         Shipping::updateOrCreate([
-            'name'       => 'Shamim',
-            'email'      => 'shamim42@gmail.com',
+            'first_name'   => 'Shamim',
+            'last_name'    => 'Osman',
+            'email'        => 'shamim42@gmail.com',
             'phone_number' => '01780309045',
             'address'      => 'shiromoni, khulna, khulna, 9100',
             'state'        => 'khulna',

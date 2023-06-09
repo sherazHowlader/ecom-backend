@@ -14,7 +14,6 @@ return new class extends Migration
             $table->string('user_id');
             $table->string('product_id');
             $table->string('product_variant');
-            $table->string('name');
             $table->string('regular_price');
             $table->string('discount_price');
             $table->string('quantity');
