@@ -51,7 +51,7 @@ class OrderSeeder extends Seeder
             'phone_number' => '01780309045',
             'address'      => 'shiromoni, khulna, khulna, 9100',
             'state'        => 'khulna',
-            'postcode'     => 9100,
+            'post_code'    => 9100,
         ]);
     }
 }
