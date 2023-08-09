@@ -85,8 +85,8 @@
                             <textarea name="short_description" id="" rows="5" class="form-control" placeholder="Short Description">{{$product->short_description}}</textarea>
                         </div>
                         <div class="from-group">
-                            <label for="password"> Description : </label>
-                            <textarea name="description" id="" rows="5" class="form-control" placeholder="Description">{{$product->description}}</textarea>
+                            <label for="password"> Long Description : </label>
+                            <textarea name="long_description" id="" rows="5" class="form-control" placeholder="Long Description">{{$product->long_description}}</textarea>
                         </div>
 
                         <div class="from-group my-2">

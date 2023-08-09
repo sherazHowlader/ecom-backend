@@ -41,7 +41,7 @@ class Product extends Model
         $status = $this->status;
 
         return match ($status) {
-            '0' => "<p class='badge badge-danger rounded-pill m-0'>Deactive</p>",
+            0 => "<p class='badge badge-danger rounded-pill m-0'>Deactive</p>",
             default => "<p class='badge badge-info rounded-pill m-0'>Active</p>",
         };
     }

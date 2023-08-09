@@ -16,16 +16,17 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
-            $table->foreignId('subcategory_id')->constrained('subcategories');
-            $table->string('name');
-            $table->string('slug');
+            $table->foreignId('subcategory_id')->nullable()->constrained('subcategories');
+            $table->foreignId('manufacture_id')->nullable()->constrained('manufactures');
+            $table->string('name')->unique();
+            $table->string('slug')->unique();
             $table->string('SKU')->unique();
             $table->string('image')->nullable();
             $table->string('short_description');
-            $table->string('description');
+            $table->longText('long_description');
             $table->string('regular_price');
             $table->string('discount_price')->nullable();
-            $table->string('status')->default(true);
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

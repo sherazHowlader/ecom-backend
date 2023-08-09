@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('regular_price');
             $table->string('discount_price')->nullable();
             $table->string('SKU')->unique();
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
