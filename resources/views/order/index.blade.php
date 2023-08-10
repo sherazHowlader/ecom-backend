@@ -22,11 +22,11 @@
                     <thead>
                         <tr>
                             <th class="text-center">S/L</th>
-                            <th class="text-center">Invoice</th>
+                            <th class="text-center">Invoice ID</th>
                             <th class="text-center">Customer Name</th>
-                            <th class="text-center">Payment Type</th>
-                            <th class="text-center">Total</th>
+                            <th class="text-center">Payment Method</th>                            
                             <th class="text-center">Subtotal</th>
+                            <th class="text-center">Total</th>
                             <th class="text-center">Discount</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
@@ -36,12 +36,12 @@
                         @foreach ($orders as $key => $order)
                             <tr>
                                 <td class="text-center text-muted">{{ $loop->iteration }}</td>
-                                <td class="text-center">#{{ $order->invoice_id }}</td>
+                                <td class="text-center">#{{ $order->invoice_id }} <small class="badge badge-secondary">{{$order->details_count}} Item</small></td>
                                 <td class="text-center">{{ $order->customer->full_name }}</td>
-                                <td class="text-center">{{ $order->payment_type }}</td>
-                                <td class="text-center">{{ $order->total }}</td>
+                                <td class="text-center">{{ $order->payment->method}}</td>                               
                                 <td class="text-center">{{ $order->subtotal }}</td>
-                                <td class="text-center">{{ $order->discount }}</td>
+                                <td class="text-center">{{ $order->total }}</td>
+                                <td class="text-center">{{ $order->has_discount }}</td>
                                 <td class="text-center">{!! $order->display_status !!}</td>
                                 <td class="text-center">
                                     <a class="btn btn-info btn-sm" href="{{route('order.show', $order->id)}}">
@@ -51,9 +51,16 @@
                                         More
                                     </button>
                                     <div class="dropdown-menu">
-                                        @if ($order->status !== 'complete' & $order->status !== 'cancel')
+                                        @if ($order->status == 'pending')                                            
                                             <a href="{{route('order.complete', $order->id)}}" class="dropdown-item">
-                                                <i class="fas fa-check-double"> Order Complete</i>
+                                                <i class="fas fa-running"> Order Process </i>
+                                            </a>
+                                            <a href="{{route('order.complete', $order->id)}}" class="dropdown-item">
+                                                <i class="fas fa-check-double"> Order Complete </i>
+                                            </a>
+                                        @elseif ($order->status == 'process')
+                                            <a href="{{route('order.complete', $order->id)}}" class="dropdown-item">
+                                                <i class="fas fa-check-double"> Order Complete </i>
                                             </a>
                                         @endif
                                         
@@ -63,7 +70,7 @@
 
                                         @if ($order->status == 'cancel')                                        
                                             <a href="" class="dropdown-item">
-                                                <i class="fas fa-trash-alt"> Order Delete</i>
+                                                <i class="fas fa-trash-alt"> Order Delete </i>
                                             </a>
                                         @endif                                        
                                     </div>

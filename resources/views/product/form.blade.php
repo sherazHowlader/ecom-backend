@@ -68,8 +68,8 @@
                             <textarea name="short_description" id="" rows="5" class="form-control" placeholder="Short Description"></textarea>
                         </div>
                         <div class="from-group">
-                            <label for="password"> Description : </label>
-                            <textarea name="description" id="" rows="5" class="form-control" placeholder="Description"></textarea>
+                            <label for="password"> Long Description : </label>
+                            <textarea name="long_description" id="" rows="5" class="form-control" placeholder="Long Description"></textarea>
                         </div>
                     </div>
                 </div>

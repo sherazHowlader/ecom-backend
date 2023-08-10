@@ -39,7 +39,7 @@
         </div>
         <div class="text-center mb-4 mt-3">
           <h5>
-              <b> {{auth()->user()->full_name}} </b> <br>
+              {{-- <b> {{auth()->user()->full_name}} </b> <br> --}}
           </h5>
           <h6>
               Admin

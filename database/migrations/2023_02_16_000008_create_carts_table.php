@@ -12,12 +12,9 @@ return new class extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->string('user_id');
-            $table->string('product_id');
-            $table->string('product_variant');
-            $table->string('regular_price');
-            $table->string('discount_price');
-            $table->string('quantity');
+            $table->foreignId('product_id')->constrained('products');
             $table->string('SKU');
+            $table->integer('quantity');            
             $table->timestamps();
         });
     }

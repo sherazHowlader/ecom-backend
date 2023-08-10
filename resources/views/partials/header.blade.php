@@ -73,10 +73,10 @@
                         </div>
                         <div class="widget-content-left  ml-3 header-user-info">
                             <div class="widget-heading">
-                                {{auth()->user()->full_name}}
+                                {{-- {{auth()->user()->full_name}} --}}
                             </div>
                             <div class="widget-subheading">
-                                {{auth()->user()->email}}
+                                {{-- {{auth()->user()->email}} --}}
                             </div>
                         </div>
                     </div>

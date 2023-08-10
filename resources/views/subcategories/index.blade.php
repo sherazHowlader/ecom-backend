@@ -27,9 +27,9 @@
                 <table class="align-middle mb-0 table table-borderless table-striped table-hover text-center">
                     <thead>
                         <tr>
-                            <th class="text-center">S/L</th>
-                            <th class="text-center">Category Name</th>
+                            <th class="text-center">S/L</th>                            
                             <th class="text-center">Subcategory Name</th>
+                            <th class="text-center">Category Name</th>
                             <th class="text-center">Slug</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
@@ -38,9 +38,9 @@
                     <tbody>
                         @foreach ($subcategories as $key => $subcategory)
                             <tr>
-                                <td class="text-center text-muted">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ $subcategory->categorie->name }}</td>
+                                <td class="text-center text-muted">{{ $loop->iteration }}</td>                                
                                 <td class="text-center">{{ $subcategory->name }}</td>
+                                <td class="text-center">{{ $subcategory->categorie->name }}</td>
                                 <td class="text-center">{{ $subcategory->slug }}</td>
                                 <td class="text-center"> {!! $subcategory->display_status !!} </td>
                                 <td class="text-center">

@@ -37,22 +37,29 @@ class ProductVariantsSeeder extends Seeder
             'size'          => '2100 mAh',
             'regular_price'  => '2100',
             'discount_price' => '2000',
-            'SKU' => '229711895_BD-1173279422',
+            'SKU' => '259407923_BD-1213130031',
         ]);
 
         ProductVariants::updateOrCreate([
-            'product_id'    => 1,
+            'product_id'    => 3,
             'size'          => '8000 mAh',
-            'regular_price' => '8000',
-            'SKU' => '229711895_BD-1173279423',
+            'regular_price' => '500',
+            'discount_price'=> '400',
+            'SKU' => '259407923_BD-1213130033',
         ]);
 
         ProductVariants::updateOrCreate([
             'product_id'    => 2,
-            'size'          => '2000 mAh',
-            'regular_price' => '2000',
-            'discount_price' => '2100',
-            'SKU' => '229711895_BD-1173279424',
+            'size'          => '2200 mAh',
+            'regular_price' => '250',
+            'SKU' => '259407923_BD-1213130032',
+        ]);
+
+        ProductVariants::updateOrCreate([
+            'product_id'    => 4,
+            'size'          => '5500 mAh',
+            'regular_price' => '420',
+            'SKU' => '259407923_BD-1213130034',
         ]);
     }
 }

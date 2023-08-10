@@ -51,7 +51,7 @@ class ProductSeeder extends Seeder
             'regular_price' => '2100',
             'discount_price' => '2000',
             'short_description' => 'Xiaomi Mi Band 5 short_description short_description',
-            'description' => 'Vegetables are parts of plants that are consumed by humans or other animals as food.',
+            'long_description' => 'Vegetables are parts of plants that are consumed by humans or other animals as food.',
             'status' => true,
         ]);
 
@@ -63,7 +63,7 @@ class ProductSeeder extends Seeder
             'SKU' => '259407923_BD-1213130032',
             'regular_price' => '250',
             'short_description' => 'Big Power Sound Speaker short_description short_description',
-            'description' => 'Pokio is the first real money native mobile poker app.',
+            'long_description' => 'Pokio is the first real money native mobile poker app.',
             'status' => true,
         ]);
 
@@ -76,7 +76,7 @@ class ProductSeeder extends Seeder
             'regular_price' => '500',
             'discount_price' => '400',
             'short_description' => 'WiFi Security Camera short_description short_description',
-            'description' => 'A hamburger, or simply burger, is a food consisting of fillings—usually a patty of ground meat, typically beef—placed inside a sliced bun or bread roll.',
+            'long_description' => 'A hamburger, or simply burger, is a food consisting of fillings—usually a patty of ground meat, typically beef—placed inside a sliced bun or bread roll.',
             'status' => true,
         ]);
 
@@ -88,7 +88,7 @@ class ProductSeeder extends Seeder
             'SKU' => '259407923_BD-1213130034',
             'regular_price' => '420',
             'short_description' => 'iphone 6x plus short_description short_description',
-            'description' => 'A frog mug (also known as a toad mug, surprise mug or ague mug) is a type of ceramic vessel mainly used for drinking beer or similar alcoholic beverages.',
+            'long_description' => 'A frog mug (also known as a toad mug, surprise mug or ague mug) is a type of ceramic vessel mainly used for drinking beer or similar alcoholic beverages.',
             'status' => true,
         ]);
     }

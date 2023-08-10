@@ -33,7 +33,7 @@
                             <th class="text-center">Name</th>
                             <th class="text-center">Slug</th>
                             <th class="text-center">SKU</th>
-                            <th class="text-center">Price</th>
+                            <th class="text-center">Regular Price</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
                         </tr>

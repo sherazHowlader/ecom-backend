@@ -44,7 +44,7 @@
                                         <td>#{{$order->invoice_id}}</td>
                                         <td>{{$order->total}}</td>
                                         <td>{{$order->subtotal}}</td>
-                                        <td>{{$order->discount}}%</td>
+                                        <td>{{$order->has_discount}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -54,7 +54,7 @@
 
                 <div class="main-card mb-3 card">
                     <div class="card-body">
-                        <h5 class="card-title"> Item List </h5>
+                        <h5 class="card-title"> Item List <small class="badge badge-secondary">{{$order->details->count()}} Item</small></h5>
                         <div class="table-responsive">
                             <table class="align-middle mb-0 table table-borderless table-striped table-hover text-center">
                                 <thead>
@@ -67,15 +67,15 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($order->orders as $orders)
+                                @foreach($order->details as $orders)
                                     <tr>
                                         <td>
                                             <img src="{{asset($orders->product->image)}}" alt="" width="50px">
                                         </td>
                                         <td>{{$orders->product->name}}</td>
-                                        <td>{{$orders->product_price}}</td>
-                                        <td>{{$orders->product_qty}}</td>
-                                        <td>{{$orders->product_price * $orders->product_qty}}</td>
+                                        <td>{{$orders->variant->product_price}}</td>
+                                        <td>{{$orders->quantity}}</td>
+                                        <td>{{$orders->variant->product_price * $orders->quantity}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -121,11 +121,11 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span>Payment Type</span>
+                                        <span>Payment Method</span>
                                     </td>
                                     <td>:</td>
                                     <td>
-                                        <span class="font-weight-bold">{{$order->payment_type}}</span>
+                                        <span class="font-weight-bold">{{$order->payment->method}}</span>
                                     </td>
                                 </tr>
 
@@ -156,7 +156,7 @@
                                     </td>
                                     <td>:</td>
                                     <td>
-                                        <span class="font-weight-bold">{{$order->shipping->name ?? 'Self'}}</span>
+                                        <span class="font-weight-bold">{{$order->shipping->full_name ?? 'Self'}}</span>
                                     </td>
                                 </tr>
                                 <tr>
