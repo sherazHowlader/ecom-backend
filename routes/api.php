@@ -29,9 +29,7 @@ Route::get('cart-inc/{SKU}', [CartController::class, 'cartInc']);
 Route::get('cart-dec/{SKU}', [CartController::class, 'cartDec']);
 Route::delete('cart-item-remove/{SKU}', [CartController::class, 'removeCartItem']);
 
-
 Route::post('place-order/', [OrderController::class, 'placeOrder']);
-
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('login/', 'login');
