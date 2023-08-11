@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\CustomerLoginController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -41,6 +43,13 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('user', UserController::class);
 });
+
+Route::group(['middleware' => 'customer'], function () {
+    Route::resource('customers', CustomerController::class);
+    Route::get('check', [CustomerController::class, 'check'])->name('check');
+});
+Route::get('customer/login', [CustomerLoginController::class, 'loginForm'])->name('customer.login.form');
+Route::post('customer/logged', [CustomerLoginController::class, 'login'])->name('customer.login');
 
 Route::fallback(function () {
     return view('errors.404');

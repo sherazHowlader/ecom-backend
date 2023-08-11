@@ -19,8 +19,8 @@ return new class extends Migration
             $table->foreignId('customer_id')->constrained('users');
             $table->foreignId('shipping_id')->constrained('shippings');
             $table->foreignId('payment_id')->constrained('payments');
-            $table->string('total');
             $table->string('subtotal');
+            $table->string('total');
             $table->string('discount')->nullable();
             $table->enum('status', ['complete','process','pending','cancel'])->default('pending');
             $table->timestamps();
