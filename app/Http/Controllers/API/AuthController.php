@@ -13,8 +13,8 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
+            'email'     => 'required|email',
+            'password'  => 'required'
         ]);
 
         $user = User::where('email', $request->email)->first();
@@ -31,8 +31,8 @@ class AuthController extends Controller
 
         $response = [
             'success' => true,
-            'user' => $user,
-            'token' => $token,
+            'user'    => $user,
+            'token'   => $token,
             'message' => 'User login success'
         ];
 
@@ -44,25 +44,25 @@ class AuthController extends Controller
         // validation
         $request->validate([
             'first_name' => 'required',
-            'last_name' => 'required|email',
-            'password' => 'required',
+            'last_name'  => 'required|email',
+            'password'   => 'required',
             'c_password' => 'required|same:password'
         ]);
 
 
         $user = User::create([
             'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'last_name'  => $request->last_name,
+            'email'      => $request->email,
+            'password'   => Hash::make($request->password)
         ]);
 
         $token = $user->createToken('apiToken')->plainTextToken;
 
         $response = [
             'success' => true,
-            'user' => $user,
-            'token' => $token,
+            'user'    => $user,
+            'token'   => $token,
             'message' => 'User register successfully'
         ];
 

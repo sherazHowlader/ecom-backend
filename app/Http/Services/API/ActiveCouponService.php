@@ -10,6 +10,6 @@ class ActiveCouponService
     {
         return Coupon::where('name', $request->name)
             ->where('status', true)
-            ->first();
+            ->firstOrFail();
     }
 }

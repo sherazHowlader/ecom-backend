@@ -13,7 +13,7 @@ use Illuminate\Http\JsonResponse;
 
 class ProductController
 {
-    public function getAllProduct(): JsonResponse
+    public function getProducts(): JsonResponse
     {
         $products = ActiveProductService::getProducts();
         ProductTransformService::getProducts($products);
