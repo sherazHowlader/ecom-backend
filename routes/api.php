@@ -14,6 +14,7 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::get('/user', [CustomerController::class, 'userInfo']);
 });
 
+
 //Public Routes
 Route::get('categories/', [CategoryController::class, 'getCategories']);
 Route::get('categorie/{slug}', [CategoryController::class, 'categoryWiseProduct']);

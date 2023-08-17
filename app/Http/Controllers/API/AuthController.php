@@ -83,7 +83,7 @@ class AuthController extends Controller
 
     public function mytoken()
     {
-//      return $request->bearerToken();
-        return $token = Cookie::get('access_token');
+        // return $request->bearerToken();
+        return Cookie::get('access_token');
     }
 }
