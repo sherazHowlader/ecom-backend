@@ -73,18 +73,15 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
-
         $response = [
             'success' => true,
-            'message' => 'User logout success'
+            'msg'     => 'You have been securely logged out'
         ];
-
-        return response()->json($response, 200);
+        return response()->json($response)->withCookie(Cookie::forget('access_token'));
     }
 
     public function mytoken()
     {
-        // return $request->bearerToken();
         return Cookie::get('access_token');
     }
 }
