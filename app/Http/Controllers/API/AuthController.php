@@ -18,6 +18,7 @@ class AuthController extends Controller
         ]);
 
         $user = User::where('email', $request->email)->first();
+        $user['full_name'] = $user->full_name;
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             $response = [

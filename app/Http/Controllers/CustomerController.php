@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -18,16 +19,8 @@ class CustomerController extends Controller
 
     public function userInfo(Request $request)
     {
-        // return response()->json($request->user());
-        try {
-            $user = $request->user();
-            if ($user) {
-                return response()->json($user);
-            } else {
-                return response()->json(['error' => 'User not found'], 404);
-            }
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Server error'], 500);
-        }
+        $user = $request->user();    
+        $user['full_name'] = $user->full_name;
+        return response()->json($user);
     }
 }
