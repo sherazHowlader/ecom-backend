@@ -45,7 +45,8 @@ class AuthController extends Controller
         // validation
         $request->validate([
             'first_name' => 'required',
-            'last_name'  => 'required|email',
+            'last_name'  => 'required',
+            'email'      => 'required',
             'password'   => 'required',
             'c_password' => 'required|same:password'
         ]);
@@ -57,8 +58,10 @@ class AuthController extends Controller
             'email'      => $request->email,
             'password'   => Hash::make($request->password)
         ]);
-
+        $user['full_name'] = $user->full_name;
+        
         $token = $user->createToken('apiToken')->plainTextToken;
+        Cookie::queue(Cookie::make('access_token', $token, 1440, '/', null, true, true));
 
         $response = [
             'success' => true,
