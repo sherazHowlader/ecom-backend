@@ -18,7 +18,9 @@ class AuthController extends Controller
         ]);
 
         $user = User::where('email', $request->email)->first();
-        $user['full_name'] = $user->full_name;
+        if($user){
+            $user['full_name'] = $user->full_name;
+        }
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             $response = [
@@ -34,7 +36,7 @@ class AuthController extends Controller
             'success' => true,
             'user'    => $user,
             'token'   => $token,
-            'message' => 'User login success'
+            'message' => 'Welcome back! You have successfully logged in'
         ];
 
         return response()->json($response, 200);
@@ -42,15 +44,13 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        // validation
         $request->validate([
             'first_name' => 'required',
             'last_name'  => 'required',
-            'email'      => 'required',
-            'password'   => 'required',
+            'email'      => 'required|email|unique:users,email',
+            'password'   => 'required|min:6',
             'c_password' => 'required|same:password'
         ]);
-
 
         $user = User::create([
             'first_name' => $request->first_name,
@@ -67,7 +67,7 @@ class AuthController extends Controller
             'success' => true,
             'user'    => $user,
             'token'   => $token,
-            'message' => 'User register successfully'
+            'message' => 'You have successfully registered'
         ];
 
         return response()->json($response, 201);
